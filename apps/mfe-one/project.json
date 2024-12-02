@@ -7,13 +7,59 @@
   "tags": [],
   "targets": {
     "build": {
+      "executor": "@angular-architects/native-federation:build",
+      "options": {},
+      "configurations": {
+        "production": {
+          "target": "mfe-one:esbuild:production"
+        },
+        "development": {
+          "target": "mfe-one:esbuild:development",
+          "dev": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-architects/native-federation:build",
+      "options": {
+        "target": "mfe-one:serve-original:development",
+        "rebuildDelay": 0,
+        "dev": true,
+        "port": 0
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "mfe-one:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "mfe-one:build",
+        "port": 4201,
+        "staticFilePath": "dist/apps/mfe-one/browser",
+        "spa": true
+      }
+    },
+    "esbuild": {
       "executor": "@angular-devkit/build-angular:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/mfe-one",
         "index": "apps/mfe-one/src/index.html",
         "browser": "apps/mfe-one/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js",
+          "es-module-shims"
+        ],
         "tsConfig": "apps/mfe-one/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -22,7 +68,9 @@
             "input": "apps/mfe-one/public"
           }
         ],
-        "styles": ["apps/mfe-one/src/styles.scss"],
+        "styles": [
+          "apps/mfe-one/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -49,38 +97,20 @@
       },
       "defaultConfiguration": "production"
     },
-    "serve": {
+    "serve-original": {
       "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
         "port": 4201
       },
       "configurations": {
         "production": {
-          "buildTarget": "mfe-one:build:production"
+          "buildTarget": "mfe-one:esbuild:production"
         },
         "development": {
-          "buildTarget": "mfe-one:build:development"
+          "buildTarget": "mfe-one:esbuild:development"
         }
       },
       "defaultConfiguration": "development"
-    },
-    "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
-      "options": {
-        "buildTarget": "mfe-one:build"
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
-    "serve-static": {
-      "executor": "@nx/web:file-server",
-      "options": {
-        "buildTarget": "mfe-one:build",
-        "port": 4201,
-        "staticFilePath": "dist/apps/mfe-one/browser",
-        "spa": true
-      }
     }
   }
 }

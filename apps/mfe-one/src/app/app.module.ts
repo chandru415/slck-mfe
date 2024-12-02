@@ -7,7 +7,7 @@ import { NxWelcomeComponent } from './nx-welcome.component';
 
 @NgModule({
   declarations: [AppComponent, NxWelcomeComponent],
-  imports: [BrowserModule, RouterModule.forRoot(appRoutes)],
+  imports: [],
   providers: [],
   bootstrap: [AppComponent],
 })
