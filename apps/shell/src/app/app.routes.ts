@@ -13,4 +13,9 @@ export const appRoutes: Route[] = [
     loadComponent: () =>
       loadRemoteModule('mfe-one', './mfe-one-comp').then((m) => m.MfeOneCompComponent),
   },
+  {
+    path: 'mfe1',
+    loadChildren: () =>
+      loadRemoteModule('mfe-one', './routes').then((m) => m.appRoutes),
+  },
 ];

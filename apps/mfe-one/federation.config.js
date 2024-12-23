@@ -8,8 +8,9 @@ module.exports = withNativeFederation({
 
 
   exposes: {
-    './module': 'apps/mfe-one/src/app/app.module.ts',
-    './mfe-one-comp': 'apps/mfe-one/src/app/components/mfe-one-comp.component.ts'
+    './mfe1': 'apps/mfe-one/src/app/app.component.ts',
+    './mfe-one-comp': 'apps/mfe-one/src/app/components/mfe-one-comp.component.ts',
+    './routes': 'apps/mfe-one/src/app/app.routes.ts'
   },
 
   shared: {
