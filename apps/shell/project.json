@@ -15,7 +15,6 @@
         },
         "development": {
           "target": "shell:esbuild:development",
-          "dev": true
         }
       },
       "defaultConfiguration": "production"
